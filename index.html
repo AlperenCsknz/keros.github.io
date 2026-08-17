@@ -3,90 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciğerci Menü</title>
+    <title>Keroş - Menü</title>
+    <!-- İkonlar için FontAwesome ekliyoruz -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #2c4c3b; /* Logondaki koyu yeşil tonu */
+            --bg-color: #f5f6f8;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--bg-color);
             color: #333;
+            padding-bottom: 80px; /* Footer için boşluk */
         }
-        .header {
-            background-color: #8b0000; /* Ciğerci konseptine uygun koyu kırmızı */
-            color: white;
+
+        /* Üst Profil Alanı */
+        .hero-section {
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1974&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            padding: 40px 20px;
             text-align: center;
-            padding: 20px 10px;
+            color: white;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
         }
-        .header h1 { margin: 0; font-size: 24px; }
-        .header p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 15px;
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        .category-title {
-            border-bottom: 2px solid #8b0000;
-            color: #8b0000;
-            padding-bottom: 5px;
-            margin-top: 25px;
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 15px 0 5px 0;
+            letter-spacing: 1px;
+        }
+
+        .brand-desc {
+            font-size: 14px;
+            font-weight: 300;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* Google İnceleme Kartı */
+        .google-card {
+            background: white;
+            margin: -25px 20px 20px 20px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        .google-card p {
+            margin: 0 0 15px 0;
+            font-size: 15px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .google-btn {
+            display: inline-block;
+            background: #4285F4;
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+        }
+        
+        .google-btn:active { transform: scale(0.95); }
+
+        /* Kategoriler */
+        .categories-section {
+            padding: 0 20px;
+        }
+
+        .section-title {
             font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #222;
         }
-        .menu-item {
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 140px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 30px 10px 10px 10px;
+            box-sizing: border-box;
+        }
+
+        .category-title {
+            color: white;
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: white;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 10px 20px;
+            box-sizing: border-box;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 100;
         }
-        .item-info h3 { margin: 0 0 5px 0; font-size: 16px; }
-        .item-info p { margin: 0; font-size: 12px; color: #666; }
-        .price {
-            font-weight: bold;
-            color: #8b0000;
-            font-size: 16px;
-            white-space: nowrap;
+
+        .social-link, .map-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            gap: 10px;
+        }
+
+        .social-icon {
+            font-size: 24px;
+            background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .map-icon {
+            font-size: 24px;
+            color: #34A853;
+        }
+
+        .follow-btn {
+            background: #262626;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .footer-text {
+            font-size: 13px;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Meşhur Ciğerci</h1>
-        <p>Geleneksel Lezzetler</p>
+    <!-- Üst Kısım -->
+    <div class="hero-section">
+        <!-- Logoyu buradan çekiyor, adı logo.jpg olmalı -->
+        <img src="logo.jpg" alt="Keroş Logo" class="profile-img">
+        <h1 class="brand-name">Keroş</h1>
+        <p class="brand-desc">Tereyağlı Arnavut Ciğeri</p>
     </div>
 
-    <div class="container">
-        <h2 class="category-title">Ana Yemekler</h2>
-        
-        <div class="menu-item">
-            <div class="item-info">
-                <h3>Yaprak Ciğer Porsiyon</h3>
-                <p>Mevsim salatası, közlenmiş biber ve sıcak lavaş ile</p>
-            </div>
-            <div class="price">280 TL</div>
-        </div>
+    <!-- Google Kartı -->
+    <div class="google-card">
+        <p>Google'da deneyiminizi paylaşın!</p>
+        <a href="https://search.google.com/local/writereview?placeid=ChIJ37doXnRF0xQRlPeTxN2mBXs" class="google-btn">
+            <i class="fa-brands fa-google"></i> Google'da Yorum Yap
+        </a>
+    </div>
 
-        <div class="menu-item">
-            <div class="item-info">
-                <h3>Adana Kebap</h3>
-                <p>Zırh kıyması, ezme ve yeşillik ile</p>
-            </div>
-            <div class="price">300 TL</div>
-        </div>
-
-        <h2 class="category-title">İçecekler</h2>
+    <!-- Kategoriler -->
+    <div class="categories-section">
+        <h2 class="section-title">Tüm Kategoriler</h2>
         
-        <div class="menu-item">
-            <div class="item-info">
-                <h3>Yayık Ayranı</h3>
-                <p>Açık bol köpüklü</p>
-            </div>
-            <div class="price">40 TL</div>
+        <div class="categories-grid">
+            <!-- Çorbalar -->
+            <a href="corbalar.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=600&auto=format&fit=crop" alt="Çorbalar">
+                <div class="category-overlay">
+                    <h3 class="category-title">Çorbalar</h3>
+                </div>
+            </a>
+
+            <!-- Yemekler (Izgara ve Ciğer yerine) -->
+            <a href="yemekler.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1615865417482-1277a83d7cb4?q=80&w=600&auto=format&fit=crop" alt="Yemekler">
+                <div class="category-overlay">
+                    <h3 class="category-title">Yemekler</h3>
+                </div>
+            </a>
+
+            <!-- İçecekler -->
+            <a href="icecekler.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=600&auto=format&fit=crop" alt="İçecekler">
+                <div class="category-overlay">
+                    <h3 class="category-title">İçecekler</h3>
+                </div>
+            </a>
         </div>
+    </div>
+
+    <!-- Alt Menü (Footer) -->
+    <div class="footer">
+        <div class="social-link">
+            <i class="fa-brands fa-instagram social-icon"></i>
+            <div>
+                <div class="footer-text">Instagram</div>
+                <div style="font-size: 10px; color: #888;">(Yakında)</div>
+            </div>
+        </div>
+        <a href="#" class="follow-btn">Takip Et</a>
+        
+        <a href="https://maps.google.com/?q=Keroş+Arnavut+Ciğeri" class="map-link">
+            <i class="fa-solid fa-map-location-dot map-icon"></i>
+            <span class="footer-text">Yol Tarifi</span>
+        </a>
     </div>
 
 </body>
