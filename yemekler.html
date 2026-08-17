@@ -42,59 +42,75 @@
 
         .menu-list {
             padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .menu-item {
             background: white;
             border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 12px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 8px rgba(0,0,0,0.03);
             border: 1px solid #f0f0f0;
         }
 
+        /* Görsel Alanı */
+        .item-img-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+
+        .item-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Bilgi ve Fiyat Alanı */
         .item-info {
             flex: 1;
-            padding-right: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .item-name {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            margin: 0;
+            margin: 0 0 8px 0;
             color: #222;
         }
 
         .item-prices {
             display: flex;
-            flex-direction: column;
-            gap: 6px;
-            align-items: flex-end;
+            gap: 10px;
+            flex-wrap: wrap; /* Sığmazsa alt satıra geçmesi için */
         }
 
         .price-box {
             display: flex;
             flex-direction: column;
-            align-items: center;
             background: #f0f5f2;
-            padding: 6px 12px;
-            border-radius: 8px;
-            min-width: 75px;
+            padding: 4px 8px;
+            border-radius: 6px;
         }
 
         .price-label {
-            font-size: 10px;
+            font-size: 9px;
             color: #555;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 2px;
         }
 
         .item-price {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
             color: #2c4c3b;
             white-space: nowrap;
@@ -110,88 +126,115 @@
 
     <div class="menu-list">
         
+        <!-- Arnavut Ciğeri -->
         <div class="menu-item">
+            <div class="item-img-container">
+                <img src="ciger-servis.png" alt="Arnavut Ciğeri">
+            </div>
             <div class="item-info">
                 <h3 class="item-name">Arnavut Ciğeri</h3>
-            </div>
-            <div class="item-prices">
-                <div class="price-box"><span class="price-label">Servis</span><span class="item-price">450 TL</span></div>
-                <div class="price-box"><span class="price-label">Ekmek Arası</span><span class="item-price">350 TL</span></div>
+                <div class="item-prices">
+                    <div class="price-box"><span class="price-label">Servis</span><span class="item-price">450 TL</span></div>
+                    <div class="price-box"><span class="price-label">Ekmek Arası</span><span class="item-price">350 TL</span></div>
+                </div>
             </div>
         </div>
 
+        <!-- Ev Köftesi -->
         <div class="menu-item">
+            <div class="item-img-container">
+                <img src="ev-koftesi-servis.png" alt="Ev Köftesi">
+            </div>
             <div class="item-info">
                 <h3 class="item-name">Ev Köftesi</h3>
-            </div>
-            <div class="item-prices">
-                <div class="price-box"><span class="price-label">Servis</span><span class="item-price">400 TL</span></div>
-                <div class="price-box"><span class="price-label">Ekmek Arası</span><span class="item-price">350 TL</span></div>
+                <div class="item-prices">
+                    <div class="price-box"><span class="price-label">Servis</span><span class="item-price">400 TL</span></div>
+                    <div class="price-box"><span class="price-label">Ekmek Arası</span><span class="item-price">350 TL</span></div>
+                </div>
             </div>
         </div>
 
+        <!-- İnegöl Köfte -->
         <div class="menu-item">
+            <div class="item-img-container">
+                <img src="inegol-servis.png" alt="İnegöl Köfte">
+            </div>
             <div class="item-info">
                 <h3 class="item-name">İnegöl Köfte</h3>
-            </div>
-            <div class="item-prices">
-                <div class="price-box"><span class="price-label">Servis</span><span class="item-price">450 TL</span></div>
-                <div class="price-box"><span class="price-label">Ekmek Arası</span><span class="item-price">350 TL</span></div>
+                <div class="item-prices">
+                    <div class="price-box"><span class="price-label">Servis</span><span class="item-price">450 TL</span></div>
+                    <div class="price-box"><span class="price-label">Ekmek Arası</span><span class="item-price">350 TL</span></div>
+                </div>
             </div>
         </div>
 
+        <!-- Tavuk Izgara -->
         <div class="menu-item">
+            <div class="item-img-container">
+                <img src="tavuk-izgara.png" alt="Tavuk Izgara">
+            </div>
             <div class="item-info">
                 <h3 class="item-name">Tavuk Izgara</h3>
-            </div>
-            <div class="item-prices">
-                <div class="price-box"><span class="price-label">Servis</span><span class="item-price">350 TL</span></div>
-                <div class="price-box"><span class="price-label">Ekmek Arası</span><span class="item-price">250 TL</span></div>
+                <div class="item-prices">
+                    <div class="price-box"><span class="price-label">Servis</span><span class="item-price">350 TL</span></div>
+                    <div class="price-box"><span class="price-label">Ekmek Arası</span><span class="item-price">250 TL</span></div>
+                </div>
             </div>
         </div>
 
+        <!-- Tavuk Dürüm (Kavurma) - (Görseli olmadığı için boş bıraktım, dilersen kaldırabilir veya jenerik bir görsel ekleyebiliriz) -->
         <div class="menu-item">
             <div class="item-info">
                 <h3 class="item-name">Tavuk Dürüm (Kavurma)</h3>
-            </div>
-            <div class="item-prices">
-                <div class="price-box"><span class="item-price">350 TL</span></div>
+                <div class="item-prices">
+                    <div class="price-box"><span class="item-price">350 TL</span></div>
+                </div>
             </div>
         </div>
 
+        <!-- Az ondan, az ondan -->
         <div class="menu-item">
+            <div class="item-img-container">
+                <img src="az-ondan.png" alt="Az ondan, az ondan">
+            </div>
             <div class="item-info">
                 <h3 class="item-name">Az ondan, az ondan</h3>
-            </div>
-            <div class="item-prices">
-                <div class="price-box"><span class="item-price">480 TL</span></div>
+                <div class="item-prices">
+                    <div class="price-box"><span class="item-price">480 TL</span></div>
+                </div>
             </div>
         </div>
-
+        
+        <!-- Yarım Porsiyon (Resimsiz) -->
         <div class="menu-item">
             <div class="item-info">
                 <h3 class="item-name">Yarım Porsiyon</h3>
-            </div>
-            <div class="item-prices">
-                <div class="price-box"><span class="item-price">250 TL</span></div>
+                <div class="item-prices">
+                    <div class="price-box"><span class="item-price">250 TL</span></div>
+                </div>
             </div>
         </div>
 
+        <!-- Mantı -->
         <div class="menu-item">
+            <div class="item-img-container">
+                <img src="manti.jpg" alt="Mantı">
+            </div>
             <div class="item-info">
                 <h3 class="item-name">Mantı</h3>
-            </div>
-            <div class="item-prices">
-                <div class="price-box"><span class="item-price">350 TL</span></div>
+                <div class="item-prices">
+                    <div class="price-box"><span class="item-price">350 TL</span></div>
+                </div>
             </div>
         </div>
 
+        <!-- Piyaz (Resimsiz) -->
         <div class="menu-item">
             <div class="item-info">
                 <h3 class="item-name">Piyaz</h3>
-            </div>
-            <div class="item-prices">
-                <div class="price-box"><span class="item-price">150 TL</span></div>
+                <div class="item-prices">
+                    <div class="price-box"><span class="item-price">150 TL</span></div>
+                </div>
             </div>
         </div>
 
