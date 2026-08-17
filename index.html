@@ -10,7 +10,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
         :root {
-            --primary-color: #2c4c3b; /* Logondaki koyu yeşil tonu */
+            --primary-color: #2c4c3b;
             --bg-color: #f5f6f8;
         }
 
@@ -20,12 +20,11 @@
             padding: 0;
             background-color: var(--bg-color);
             color: #333;
-            padding-bottom: 80px; /* Footer için boşluk */
+            padding-bottom: 80px; 
         }
 
         /* Üst Profil Alanı */
         .hero-section {
-            /* Arka plan görseli arkaplan.jpg olarak ayarlandı */
             background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('arkaplan.jpg');
             background-size: cover;
             background-position: center;
@@ -36,6 +35,12 @@
             border-bottom-right-radius: 20px;
         }
 
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
         .profile-img {
             width: 100px;
             height: 100px;
@@ -44,9 +49,6 @@
             object-fit: cover;
             background-color: white;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            /* Logoyu tam ortalamak için eklenen kodlar */
-            display: block;
-            margin: 0 auto;
         }
 
         .brand-name {
@@ -124,10 +126,9 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Yemekler kategorisini tam genişlikte yapmak için eklendi */
         .category-card.full-width {
             grid-column: span 2;
-            height: 160px; /* Daha vurgulu olması için yüksekliği biraz artırıldı */
+            height: 160px;
         }
 
         .category-card img {
@@ -209,14 +210,14 @@
 </head>
 <body>
 
-    <!-- Üst Kısım -->
     <div class="hero-section">
-        <img src="logo.jpg" alt="Keroş Logo" class="profile-img">
+        <div class="logo-wrapper">
+            <img src="logo.jpg" alt="Keroş Logo" class="profile-img">
+        </div>
         <h1 class="brand-name">Keroş</h1>
         <p class="brand-desc">Tereyağlı Arnavut Ciğeri</p>
     </div>
 
-    <!-- Google Kartı -->
     <div class="google-card">
         <p>Google'da deneyiminizi paylaşın!</p>
         <a href="https://search.google.com/local/writereview?placeid=ChIJ37doXnRF0xQRlPeTxN2mBXs" class="google-btn">
@@ -224,15 +225,14 @@
         </a>
     </div>
 
-    <!-- Kategoriler -->
     <div class="categories-section">
         <h2 class="section-title">Tüm Kategoriler</h2>
         
         <div class="categories-grid">
             
-            <!-- Yemekler Kategorisi (Tam Genişlik) -->
+            <!-- Yemekler Kategorisi (Yeni Resim Bağlandı) -->
             <a href="yemekler.html" class="category-card full-width">
-                <img src="https://images.unsplash.com/photo-1615865417482-1277a83d7cb4?q=80&w=1200&auto=format&fit=crop" alt="Yemekler">
+                <img src="ciger.png" alt="Yemekler">
                 <div class="category-overlay">
                     <h3 class="category-title">Yemekler</h3>
                 </div>
@@ -257,7 +257,6 @@
         </div>
     </div>
 
-    <!-- Alt Menü (Footer) -->
     <div class="footer">
         <div class="social-link">
             <i class="fa-brands fa-instagram social-icon"></i>
