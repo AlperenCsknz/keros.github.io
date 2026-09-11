@@ -1,0 +1,50 @@
+{
+  "items": [
+    {
+      "name": "Arnavut Ciğeri",
+      "image": "ciger-servis.png",
+      "price_servis": "450",
+      "price_ekmek": "350"
+    },
+    {
+      "name": "Ev Köftesi",
+      "image": "ev-koftesi-servis.png",
+      "price_servis": "400",
+      "price_ekmek": "350"
+    },
+    {
+      "name": "İnegöl Köfte",
+      "image": "inegol-servis.png",
+      "price_servis": "450",
+      "price_ekmek": "350"
+    },
+    {
+      "name": "Tavuk Izgara",
+      "image": "tavuk-izgara.png",
+      "price_servis": "350",
+      "price_ekmek": "250"
+    },
+    {
+      "name": "Tavuk Dürüm (Kavurma)",
+      "price_tek": "350"
+    },
+    {
+      "name": "Az ondan, az ondan",
+      "image": "az-ondan.png",
+      "price_tek": "480"
+    },
+    {
+      "name": "Yarım Porsiyon",
+      "price_tek": "250"
+    },
+    {
+      "name": "Mantı",
+      "image": "manti.jpg",
+      "price_tek": "350"
+    },
+    {
+      "name": "Piyaz",
+      "price_tek": "150"
+    }
+  ]
+}
