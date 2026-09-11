@@ -1,0 +1,38 @@
+backend:
+  name: github
+  repo: alperencsknz/keros.github.io # GitHub deponuz
+  branch: main # Ana dalınız
+
+# Görselleriniz ana dizinde olduğu için klasör belirtmiyoruz
+media_folder: "."
+public_folder: ""
+
+collections:
+  - name: "menu"
+    label: "Menü Yönetimi"
+    files:
+      - file: "menu.json"
+        label: "Ürünler ve Fiyatlar"
+        name: "menu_data"
+        fields:
+          - name: "items"
+            label: "Menüdeki Tüm Yemekler"
+            widget: "list"
+            summary: "{{fields.name}} - ₺{{fields.price_servis}}" # Ekranda ürün adını ve fiyatını gösterir
+            fields:
+              - { label: "Ürün Adı", name: "name", widget: "string" }
+              
+              # GÖRSEL YÜKLEME KISMI
+              - { label: "Ürün Görseli", name: "image", widget: "image" }
+              
+              # FİYATLAR (Zorunlu değil, boş bırakılabilir)
+              - { label: "Servis Fiyatı (₺)", name: "price_servis", widget: "number", value_type: "int", required: false }
+              - { label: "Ekmek Arası Fiyatı (₺)", name: "price_ekmek", widget: "number", value_type: "int", required: false }
+              
+              # KATEGORİLEME (Çorbalar, İçecekler vb. ayırmak için)
+              - label: "Kategori"
+                name: "category"
+                widget: "select"
+                options: ["Yemekler", "Çorbalar", "İçecekler", "Tatlılar"]
+                default: "Yemekler"
+                required: false
