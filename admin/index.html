@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Menü Admin Paneli</title>
+    <!-- Görsel JSON Editörü Kütüphanesi -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.10.0/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.10.0/jsoneditor.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { margin-top: 0; font-size: 24px; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .login-box { margin-bottom: 20px; padding: 20px; background: #e8f4f8; border-radius: 8px; }
+        input[type="password"], input[type="text"] { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background: #3498db; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
+        button:hover { background: #2980b9; }
+        .btn-save { background: #2ecc71; margin-top: 20px; font-size: 16px; }
+        .btn-save:hover { background: #27ae60; }
+        #jsoneditor { width: 100%; height: 500px; margin-top: 20px; display: none; }
+        .status { margin-top: 10px; font-weight: bold; padding: 10px; border-radius: 5px; display: none; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🍽️ Keros Menü Yönetim Paneli</h1>
+
+    <div class="login-box" id="loginBox">
+        <p>Menüyü düzenlemek için GitHub <b>Personal Access Token (Classic)</b> kodunuzu girin.</p>
+        <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+        <button onclick="fetchMenu()">Menüyü Getir</button>
+    </div>
+
+    <div id="statusMessage" class="status"></div>
+
+    <div id="jsoneditor"></div>
+    <button class="btn-save" id="saveBtn" style="display:none;" onclick="saveMenu()">💾 Değişiklikleri Kaydet ve Yayınla</button>
+</div>
+
+<script>
+    // --- GITHUB AYARLARINIZ (Eğer farklıysa burayı değiştirin) ---
+    const GITHUB_USERNAME = "alperencsknz"; 
+    const GITHUB_REPO = "keros.github.io"; // Reponuzun tam adı
+    const FILE_PATH = "menu.json"; // Menü verilerinizin olduğu dosya
+    // -------------------------------------------------------------
+
+    let fileSha = ""; // GitHub'a kaydederken gereken güvenlik kodu
+    let editor = null;
+
+    // Türkçe karakter (UTF-8) destekli Base64 dönüşüm fonksiyonları
+    function b64EncodeUnicode(str) { return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) { return String.fromCharCode('0x' + p1); })); }
+    function b64DecodeUnicode(str) { return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) { return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); }).join('')); }
+
+    function showStatus(message, isError = false) {
+        const el = document.getElementById('statusMessage');
+        el.style.display = 'block';
+        el.textContent = message;
+        el.className = isError ? 'status error' : 'status success';
+        setTimeout(() => el.style.display = 'none', 5000);
+    }
+
+    async function fetchMenu() {
+        const token = document.getElementById('githubToken').value;
+        if (!token) return showStatus("Lütfen GitHub Token giriniz!", true);
+
+        const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/${FILE_PATH}`;
+
+        try {
+            const response = await fetch(url, { headers: { "Authorization": `token ${token}` } });
+            if (!response.ok) throw new Error("Token hatalı veya menu.json bulunamadı!");
+            
+            const data = await response.json();
+            fileSha = data.sha; // Kayıt için gerekli
+            const jsonContent = JSON.parse(b64DecodeUnicode(data.content));
+
+            document.getElementById('loginBox').style.display = 'none';
+            document.getElementById('jsoneditor').style.display = 'block';
+            document.getElementById('saveBtn').style.display = 'block';
+
+            if (!editor) {
+                const container = document.getElementById("jsoneditor");
+                const options = { mode: 'tree', modes: ['tree', 'code'], name: 'Menu' };
+                editor = new JSONEditor(container, options);
+            }
+            editor.set(jsonContent);
+            showStatus("Menü başarıyla yüklendi! Düzenleyebilirsiniz.");
+
+        } catch (error) { showStatus(error.message, true); }
+    }
+
+    async function saveMenu() {
+        const token = document.getElementById('githubToken').value;
+        const updatedJson = editor.get();
+        const contentBase64 = b64EncodeUnicode(JSON.stringify(updatedJson, null, 2));
+
+        const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/${FILE_PATH}`;
+        const body = {
+            message: "Admin Panelinden menü güncellendi",
+            content: contentBase64,
+            sha: fileSha
+        };
+
+        document.getElementById('saveBtn').innerText = "Kaydediliyor... Lütfen bekleyin";
+
+        try {
+            const response = await fetch(url, {
+                method: "PUT",
+                headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+
+            if (!response.ok) throw new Error("Kaydetme başarısız oldu!");
+            
+            const data = await response.json();
+            fileSha = data.content.sha; // Yeni sha'yı al
+            showStatus("Değişiklikler başarıyla kaydedildi! Siteniz birkaç dakika içinde güncellenecektir.");
+            
+        } catch (error) { 
+            showStatus(error.message, true); 
+        } finally {
+            document.getElementById('saveBtn').innerText = "💾 Değişiklikleri Kaydet ve Yayınla";
+        }
+    }
+</script>
+</body>
+</html>
