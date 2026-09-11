@@ -1,19 +1,17 @@
 backend:
-   name: github
-   repo: alperencsknz/keros.github.io
-   branch: main
-   auth_type: pkce
-   app_id: Ov23litPNLhWpbYBQzi1
+  name: github
+  repo: alperencsknz/keros.github.io
+  branch: main
 
-media_folder: "img"
-public_folder: "img"
+media_folder: "images"
+public_folder: "images"
 
 collections:
-  - name: "menu"
-    label: "Menü Paneli"
+  - name: "yemekler"
+    label: "Yemekler Menüsü"
     files:
-      - label: "Yemekler Listesi"
-        name: "yemekler"
+      - label: "Yemekleri Düzenle"
+        name: "yemekler_liste"
         file: "menu.json"
         fields:
           - label: "Ürünler"
@@ -21,7 +19,33 @@ collections:
             widget: "list"
             fields:
               - {label: "Yemek Adı", name: "name", widget: "string"}
-              - {label: "Görsel (İsteğe Bağlı)", name: "image", widget: "image", required: false}
+              - {label: "Görsel", name: "image", widget: "image", required: false}
               - {label: "Servis Fiyatı", name: "price_servis", widget: "string", required: false}
-              - {label: "Ekmek Arası Fiyatı", name: "price_ekmek", widget: "string", required: false}
+              - {label: "Ekmek Arası", name: "price_ekmek", widget: "string", required: false}
               - {label: "Tek Fiyat", name: "price_tek", widget: "string", required: false}
+  - name: "corbalar"
+    label: "Çorbalar Menüsü"
+    files:
+      - label: "Çorbaları Düzenle"
+        name: "corbalar_liste"
+        file: "corbalar.json"
+        fields:
+          - label: "Ürünler"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "Çorba Adı", name: "name", widget: "string"}
+              - {label: "Fiyat", name: "price_tek", widget: "string"}
+  - name: "icecekler"
+    label: "İçecekler Menüsü"
+    files:
+      - label: "İçecekleri Düzenle"
+        name: "icecekler_liste"
+        file: "icecekler.json"
+        fields:
+          - label: "Ürünler"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "İçecek Adı", name: "name", widget: "string"}
+              - {label: "Fiyat", name: "price_tek", widget: "string"}
