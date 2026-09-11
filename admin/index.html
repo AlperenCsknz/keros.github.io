@@ -4,11 +4,69 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Keroş Yönetim Paneli</title>
-    <!-- Önbelleği zorla delen ve Netlify'ı engelleyen kod -->
-    <link href="config.yml?v=bitti" type="text/yaml" rel="cms-config-url">
+    <!-- Netlify'ı sonsuza dek tarihe gömen Yeni Sistem -->
+    <link rel="stylesheet" href="https://unpkg.com/@staticcms/app@^4.0.0/dist/main.css" />
   </head>
   <body>
-    <!-- Kaya gibi sağlam Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+    <script src="https://unpkg.com/@staticcms/app@^4.0.0/dist/static-cms-app.js"></script>
+    <script>
+      window.initCMS({
+        config: {
+          backend: {
+            name: 'github',
+            repo: 'alperencsknz/keros.github.io',
+            branch: 'main',
+            auth_type: 'pkce',
+            app_id: 'BURAYA_KENDI_CLIENT_ID_KODUNU_YAZ' // <-- SADECE BURAYI DEĞİŞTİR
+          },
+          media_folder: 'images',
+          public_folder: '/images',
+          collections: [
+            {
+              name: 'menu',
+              label: 'Menü Yönetimi',
+              files: [
+                {
+                  label: 'Yemekler',
+                  name: 'yemekler',
+                  file: 'menu.json',
+                  fields: [
+                    {label: 'Ürünler', name: 'items', widget: 'list', fields: [
+                      {label: 'Yemek Adı', name: 'name', widget: 'string'},
+                      {label: 'Görsel (İsteğe Bağlı)', name: 'image', widget: 'image', required: false},
+                      {label: 'Servis Fiyatı', name: 'price_servis', widget: 'string', required: false},
+                      {label: 'Ekmek Arası Fiyatı', name: 'price_ekmek', widget: 'string', required: false},
+                      {label: 'Tek Fiyat', name: 'price_tek', widget: 'string', required: false}
+                    ]}
+                  ]
+                },
+                {
+                  label: 'Çorbalar',
+                  name: 'corbalar',
+                  file: 'corbalar.json',
+                  fields: [
+                    {label: 'Ürünler', name: 'items', widget: 'list', fields: [
+                      {label: 'Çorba Adı', name: 'name', widget: 'string'},
+                      {label: 'Fiyat', name: 'price_tek', widget: 'string'}
+                    ]}
+                  ]
+                },
+                {
+                  label: 'İçecekler',
+                  name: 'icecekler',
+                  file: 'icecekler.json',
+                  fields: [
+                    {label: 'Ürünler', name: 'items', widget: 'list', fields: [
+                      {label: 'İçecek Adı', name: 'name', widget: 'string'},
+                      {label: 'Fiyat', name: 'price_tek', widget: 'string'}
+                    ]}
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      });
+    </script>
   </body>
 </html>
