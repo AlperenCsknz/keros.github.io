@@ -2,18 +2,20 @@ backend:
   name: github
   repo: alperencsknz/keros.github.io
   branch: main
-  app_id: Ov23litPNLhWpbYBQzi1
 
 media_folder: "images"
 public_folder: "images"
 
 collections:
-  - name: "yemekler"
-    label: "Yemekler Menüsü"
+  - name: "menu_yonetimi"
+    label: "Menü Yönetimi"
+    description: "Tüm menülerinizi buradan güncelleyebilirsiniz"
     files:
       - label: "Yemekleri Düzenle"
-        name: "yemekler_liste"
+        name: "yemekler"
         file: "menu.json"
+        extension: "json"
+        format: "json"
         fields:
           - label: "Ürünler"
             name: "items"
@@ -24,12 +26,12 @@ collections:
               - {label: "Servis Fiyatı", name: "price_servis", widget: "string", required: false}
               - {label: "Ekmek Arası Fiyatı", name: "price_ekmek", widget: "string", required: false}
               - {label: "Tek Fiyat", name: "price_tek", widget: "string", required: false}
-  - name: "corbalar"
-    label: "Çorbalar Menüsü"
-    files:
+
       - label: "Çorbaları Düzenle"
-        name: "corbalar_liste"
+        name: "corbalar"
         file: "corbalar.json"
+        extension: "json"
+        format: "json"
         fields:
           - label: "Ürünler"
             name: "items"
@@ -37,12 +39,12 @@ collections:
             fields:
               - {label: "Çorba Adı", name: "name", widget: "string"}
               - {label: "Fiyat", name: "price_tek", widget: "string"}
-  - name: "icecekler"
-    label: "İçecekler Menüsü"
-    files:
+
       - label: "İçecekleri Düzenle"
-        name: "icecekler_liste"
+        name: "icecekler"
         file: "icecekler.json"
+        extension: "json"
+        format: "json"
         fields:
           - label: "Ürünler"
             name: "items"
