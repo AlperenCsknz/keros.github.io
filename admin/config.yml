@@ -1,9 +1,9 @@
 backend:
-  name: github
-  repo: alperencsknz/keros.github.io
-  branch: main
-  auth_type: pkce
-  app_id: Ov23litPNLhWpbYBQzi1
+   name: github
+   repo: alperencsknz/keros.github.io
+   branch: main
+   auth_type: pkce
+   app_id: Ov23litPNLhWpbYBQzi1
 
 media_folder: "img"
 public_folder: "img"
